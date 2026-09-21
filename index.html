@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0c1d17">
+  <meta name="description" content="東南アジア伝統楽器（ガムラン・木琴・一弦琴）× 現代ローファイ・チルビート ── 勉強・作業・配信向けBGMジェネレーター">
+
+  <title>🌴 東南アジア・チル＆ポップBGMコンポーザー | SEA Chill & Beats</title>
+
+  <!-- PWA & Mobile Web App メタタグ -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="東南アジアBGM">
+  <meta name="application-name" content="東南アジア・チル＆ポップBGMコンポーザー">
+  <link rel="icon" type="image/png" href="assets/icon-192.png">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+
+  <!-- Google Fonts: Space Grotesk & Noto Sans JP -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- ヘッダー（リゾートヴィラ＆エメラルド調） -->
+  <header>
+    <div class="brand-wrapper">
+      <div class="brand-icon">
+        <img src="assets/icon-192.png" alt="東南アジア・チル アイコン">
+      </div>
+      <div class="brand">
+        <h1>🌴 東南アジア・チル＆ポップBGMコンポーザー</h1>
+        <p class="tagline">ガムラン・木琴・一弦琴 × ローファイ・チルビート ── 勉強・作業・YouTube配信向け</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <!-- PWAインストールボタン（Android/PC Chrome） -->
+      <button type="button" class="install-pwa-btn" id="installPwaBtn" style="display: none;">
+        📲 アプリをインストール
+      </button>
+      <!-- インストールガイドボタン（iPhone/共通） -->
+      <button type="button" class="install-guide-btn" id="installGuideBtn">
+        📱 スマホに追加
+      </button>
+      <div class="header-badge">GAMELAN × LOFI BEATS</div>
+    </div>
+  </header>
+
+  <!-- メインコンテンツ（2カラム） -->
+  <main class="grid">
+
+    <!-- 左カラム：設定パネル群 -->
+    <div class="column-left">
+
+      <!-- 1. チャンネルジャンル＆曲名 -->
+      <section class="panel">
+        <h2>1. チャンネルジャンル＆曲名 <span class="badge">GENRE</span></h2>
+
+        <div class="field">
+          <label class="small" for="trackTitleInput">曲名（任意・リゾートや街の情景がプロンプトとYouTubeタイトルに反映されます）</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" id="trackTitleInput" placeholder="例: Rainy Afternoon in Ubud" value="Rainy Afternoon in Ubud">
+            <button type="button" class="chip" id="randomTitleBtn" title="曲名ガチャ" style="white-space: nowrap; padding: 0 14px;">🎲 ガチャ</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="small">チャンネル方向性（1つ選択）</label>
+          <div id="genreChips" class="chip-row"></div>
+        </div>
+      </section>
+
+      <!-- 2. 東南アジア伝統民族楽器 -->
+      <section class="panel">
+        <h2>2. 東南アジア伝統民族楽器 <span class="badge">ETHNIC SOUNDS</span></h2>
+
+        <!-- 国別タブ -->
+        <div class="country-tabs">
+          <button type="button" class="country-tab active" data-country="all">🌏 すべて</button>
+          <button type="button" class="country-tab" data-country="インドネシア">🇮🇩 インドネシア</button>
+          <button type="button" class="country-tab" data-country="タイ">🇹🇭 タイ</button>
+          <button type="button" class="country-tab" data-country="ベトナム">🇻🇳 ベトナム</button>
+          <button type="button" class="country-tab" data-country="フィリピン">🇵🇭 フィリピン</button>
+        </div>
+
+        <div class="field">
+          <label class="small">伝統楽器（複数選択可・ワンクリックで調合）</label>
+          <div id="ethnicChips" class="chip-row"></div>
+        </div>
+      </section>
+
+      <!-- 3. 現代チル楽器＆熱帯環境音 -->
+      <section class="panel">
+        <h2>3. 現代チル楽器＆熱帯の自然音 <span class="badge">CHILL & NATURE</span></h2>
+
+        <div class="field">
+          <label class="small">現代チル洋楽器（複数選択可）</label>
+          <div id="modernChips" class="chip-row"></div>
+        </div>
+
+        <div class="field">
+          <label class="small">熱帯の環境音・アンビエント（複数選択可）</label>
+          <div id="envChips" class="chip-row"></div>
+        </div>
+      </section>
+
+      <!-- 4. テンポ・和声・尺 -->
+      <section class="panel">
+        <h2>4. テンポ・和声スケール・尺 <span class="badge">GROOVE</span></h2>
+
+        <div class="field">
+          <label class="small" for="scaleSelect">和声スケール・旋律様式</label>
+          <select id="scaleSelect">
+            <option value="pelog_bali" selected>バリ・ペロッグ音階 (Pelog / 神秘的で美しい東南アジア情緒)</option>
+            <option value="slendro_java">ジャワ・スレンドロ音階 (Slendro / 穏やかでピースフルな響き)</option>
+            <option value="sea_pop_chords">SEAポップス王道進行 (IV - V - III - VI / 切なくエモい)</option>
+            <option value="lofi_jazz_ii_v">ローファイ・ジャズ進行 (IIm7 - V7 - Imaj7 - VI7 / カフェ定番)</option>
+            <option value="ambient_modal">瞑想モーダル・アンビエント (持続音ドローン / 深いリラックス)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="small">テンポ（BPM）</label>
+          <div class="tempo-row">
+            <input type="range" id="tempoRange" min="60" max="130" value="80">
+            <div class="tempo-readout" id="tempoReadout">80<span> BPM</span></div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="small">曲の長さ（尺）</label>
+          <div id="durationChips" class="chip-row"></div>
+        </div>
+
+        <!-- ガムラン＆ローファイ プレビュープレイヤー -->
+        <div class="preview-player">
+          <div class="preview-controls">
+            <button type="button" class="play-btn" id="previewToggleBtn">▶ PLAY (ガムラン×ローファイ試聴)</button>
+            <div class="volume-row">
+              <span>VOLUME</span>
+              <input type="range" id="previewVolume" min="0" max="1" step="0.05" value="0.75">
+            </div>
+          </div>
+          <!-- 16ステップ バンブーLED -->
+          <div class="step-tracker" id="stepTracker">
+            <div class="step-bulb"></div>
+            <div class="step-bulb"></div>
+            <div class="step-bulb"></div>
+            <div class="step-bulb"></div>
+            <div class="step-bulb"></div>
+            <div class="step-bulb"></div>
+            <div class="step-bulb"></div>
+            <div class="step-bulb"></div>
+            <div class="step-bulb"></div>
+            <div class="step-bulb"></div>
+            <div class="step-bulb"></div>
+            <div class="step-bulb"></div>
+            <div class="step-bulb"></div>
+            <div class="step-bulb"></div>
+            <div class="step-bulb"></div>
+            <div class="step-bulb"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- プリセット・共有 -->
+      <section class="panel">
+        <h2>プリセット・共有 <span class="badge">PRESETS</span></h2>
+
+        <div class="field">
+          <label class="small" for="presetNameInput">設定の保存</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" id="presetNameInput" placeholder="プリセット名 (空欄なら曲名で保存)">
+            <button type="button" class="primary" id="savePresetBtn" style="white-space: nowrap; padding: 0 16px;">💾 保存</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="small">保存済みプリセット一覧</label>
+          <div id="presetChips" class="chip-row"></div>
+        </div>
+
+        <div class="field" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px;">
+          <button type="button" class="chip" id="shareUrlBtn">🔗 共有URLをコピー</button>
+          <button type="button" class="chip" id="exportPresetBtn">📤 JSON書き出し</button>
+          <button type="button" class="chip" id="importPresetBtn">📥 JSON読み込み</button>
+          <input type="file" id="importPresetFile" accept=".json" style="display: none;">
+        </div>
+      </section>
+
+      <!-- アクションボタン群 -->
+      <div class="actions">
+        <button type="button" class="primary" id="genBtn">✨ プロンプト再生成</button>
+        <button type="button" class="ghost" id="randomBtn">🎲 おまかせ</button>
+        <button type="button" class="ghost" id="resetBtn">↺ リセット</button>
+      </div>
+
+    </div>
+
+    <!-- 右カラム：出力パネル群 -->
+    <div class="column-right">
+
+      <!-- AIプロンプト出力 -->
+      <section class="panel">
+        <h2>AI音楽プロンプト出力 <span class="badge">OUTPUT</span></h2>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+          <div class="lang-toggle" id="langToggle">
+            <button type="button" class="on" data-lang="ja">日本語</button>
+            <button type="button" data-lang="en">English</button>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <select id="aiTargetSelect" style="width: auto; padding: 5px 10px; font-size: 0.8rem;">
+              <option value="suno_udio" selected>Suno / Udio (スタイルタグ＆構成)</option>
+              <option value="flow">Google Flow Music (詳細指示)</option>
+              <option value="plain">シンプル文章形式</option>
+            </select>
+          </div>
+        </div>
+
+        <textarea id="promptOut" readonly spellcheck="false" placeholder="プロンプトがここに生成されます..."></textarea>
+
+        <div class="copy-row">
+          <span style="font-size: 0.78rem; color: var(--text-sub);">AI音楽生成ツールにそのまま貼り付けて利用できます</span>
+          <button type="button" id="copyBtn">📋 プロンプトをコピー</button>
+        </div>
+
+        <!-- YouTube動画制作者向け支援パネル -->
+        <div class="youtube-box">
+          <h3>🎥 YouTube動画用メタデータ (90分〜2時間勉強用動画支援)</h3>
+          
+          <div class="yt-row">
+            <label for="ytVideoTitle">推奨動画タイトル (英語・SEO最適化):</label>
+            <input type="text" id="ytVideoTitle" readonly>
+          </div>
+
+          <div class="yt-row">
+            <label for="ytDescription">概要欄説明文 (チャプター・ハッシュタグ付き):</label>
+            <textarea id="ytDescription" style="min-height: 110px;" readonly></textarea>
+          </div>
+
+          <div class="yt-row">
+            <label for="ytTags">タグ一覧 (カンマ区切り):</label>
+            <input type="text" id="ytTags" readonly>
+          </div>
+
+          <div class="copy-row" style="margin-top: 8px;">
+            <span style="font-size: 0.74rem; color: var(--text-sub);">YouTube投稿時にそのままタイトル・概要欄にコピーできます</span>
+            <button type="button" id="copyYtBtn">📋 動画タイトル＆概要欄をコピー</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- タイムライン展開画面 -->
+      <section class="panel">
+        <h2>トラック展開タイムライン <span class="badge">TIMELINE</span></h2>
+        <div id="timeline" class="screen"></div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- フッター -->
+  <footer>
+    <p>🌴 <strong>東南アジア・チル＆ポップBGMコンポーザー</strong> ── ガムラン・木琴・一弦琴 × ローファイ・チルビート</p>
+    <p>東南アジアの伝統情緒と現代の勉強・作業用BGM文化を融合したプロンプトジェネレーター<br>
+    Web Audio API によるペロッグ音階ガムラン＆ローファイリアルタイムプレビュー搭載 / PWA対応</p>
+  </footer>
+
+</div>
+
+<!-- スマホ追加・インストール手順モーダル -->
+<div class="modal-overlay" id="installModal">
+  <div class="modal-box">
+    <button type="button" class="modal-close" id="modalCloseBtn">&times;</button>
+    <h2 class="modal-title">📱 スマホへの追加（PWAインストール方法）</h2>
+
+    <div class="guide-step">
+      <h3>🍎 iPhone (Safari) の場合</h3>
+      <ol>
+        <li>画面下部の中央にある<strong>共有アイコン</strong>（四角形から上向き矢印が出ているマーク）をタップします。</li>
+        <li>メニューが開いたら、少し下にスクロールして<strong>「ホーム画面に追加」</strong>をタップします。</li>
+        <li>右上の<strong>「追加」</strong>をタップすると、ホーム画面にエメラルドアイコンが追加され、全画面アプリとして起動できます。</li>
+      </ol>
+    </div>
+
+    <div class="guide-step">
+      <h3>🤖 Android (Chrome) の場合</h3>
+      <ol>
+        <li>ヘッダーに表示される<strong>「📲 アプリをインストール」</strong>ボタンをタップします（直接インストールダイアログが開きます）。</li>
+        <li>または右上の<strong>メニュー（縦の3点リーダー）</strong>をタップし、<strong>「アプリをインストール」</strong>または<strong>「ホーム画面に追加」</strong>を選択します。</li>
+      </ol>
+    </div>
+
+    <div style="text-align: center; margin-top: 16px;">
+      <button type="button" class="primary" id="modalOkBtn" style="padding: 9px 24px;">了解しました</button>
+    </div>
+  </div>
+</div>
+
+<!-- トースト通知 -->
+<div id="flash" class="flash"></div>
+
+<!-- Service Worker 登録スクリプト -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then(reg => console.log('ServiceWorker registered:', reg.scope))
+        .catch(err => console.log('ServiceWorker registration failed:', err));
+    });
+  }
+</script>
+
+<!-- メインスクリプト -->
+<script type="module" src="js/app.js"></script>
+
+</body>
+</html>
