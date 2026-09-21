@@ -1,8 +1,8 @@
 {
   "id": "sea-chill-composer-pwa",
-  "name": "東南アジア・チル＆ポップBGMコンポーザー",
-  "short_name": "東南アジアBGM",
-  "description": "東南アジア伝統楽器×現代ローファイ・チルビート ── 勉強・作業用BGM特化型ジェネレーター",
+  "name": "東南アジア＆インド・チル＆ポップBGMコンポーザー",
+  "short_name": "東南アジア＆インドBGM",
+  "description": "東南アジア＆インドの伝統楽器（ガムラン・シタール・バンスリ）× 現代ローファイ・チルビート ── 勉強・作業用BGM特化型ジェネレーター",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
