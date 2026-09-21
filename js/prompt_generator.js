@@ -113,11 +113,28 @@ function buildPlainPrompt(state, genre, scale, ethnic, modern, env, isEn) {
 export function buildYouTubeMetadata(state) {
   const genreObj = GENRES.find(g => g.id === state.genre) || GENRES[0];
   const title = state.trackTitle || 'Rainy Afternoon in Ubud';
+  const hasIndia = Array.from(state.ethnicInsts).some(id => ['sitar_classical', 'bansuri_flute', 'tabla_drums', 'sarod_fretless', 'tanpura_drone'].includes(id));
   
+  let genreTitleTag = 'Southeast Asia Lofi Study Beats [90 Mins Deep Focus]';
+  let defaultHash = '#studywithme #lofi #chillbeats #southeastasialofi #gamelanlofi #ambientrain';
+
+  if (state.genre === 'indian_classical_lofi' || hasIndia) {
+    genreTitleTag = 'Soulful Indian Classical LoFi 🌧️ Sitar & Bansuri Study Beats [90 Mins Deep Focus]';
+    defaultHash = '#indianlofi #sitarlofi #bansurichill #studywithme #classicalindianlofi #chillhop #rainlofi';
+  } else if (state.genre === 'indian_jazz_fusion') {
+    genreTitleTag = 'Indian Jazz Fusion Session 🎷 Tabla & Saxophone [2 Hours Deep Work & Coding]';
+    defaultHash = '#indianjazz #tabla #jazzfusion #pickbeat #deepwork #studymusic #focusmusic';
+  } else if (state.genre === 'raag_focus_ambient') {
+    genreTitleTag = 'Peace of Raag Yaman 🪔 Classical Indian Study & Evening Meditation [Deep Healing]';
+    defaultHash = '#raagyaman #indianclassical #meditationmusic #sitarambient #studymusic';
+  } else if (state.genre === 'carnatic_yoga') {
+    genreTitleTag = 'Carnatic Instrumental Yoga & Spa 🌿 Sacred Veena & Flute [Peaceful Meditation]';
+    defaultHash = '#carnatic #veena #yogamusic #spabgm #meditationmusic';
+  }
+
   return {
-    videoTitle: `${title} 🌿 Southeast Asia Lofi Study Beats [90 Mins Deep Focus Session]`,
-    description: `Chill and focus with traditional Southeast Asian instruments blended into cozy lo-fi hip hop beats.
-Ideal for studying, coding, reading, and relaxing.
+    videoTitle: `${title} 🌿 ${genreTitleTag}`,
+    description: `Immerse in deep focus, coding flow, and study with soulful traditional Asian instruments blended into cozy chill beats.
 
 🎧 Featured Instruments:
 ${Array.from(state.ethnicInsts).map(id => {
@@ -132,19 +149,20 @@ ${Array.from(state.environments).map(id => {
 }).filter(Boolean).join('\n')}
 
 ⏱️ Timeline Chapters:
-00:00 - Introduction (Tropical Rain & Bells)
-15:00 - Deep Focus Flow
-30:00 - Water Droplets & Bamboo Beats
-45:00 - Golden Sunset Chill
-60:00 - Evening Coffee Session
-75:00 - Gentle River Wind
-90:00 - Nightfall Calm
+00:00 - Opening Chimes & Gentle Breeze
+15:00 - Deep Work Flow
+30:00 - Soulful Strings & Bamboo Resonance
+45:00 - Golden Hour Focus
+60:00 - Evening Rain & Soft Beats
+75:00 - Contemplative Reverie
+90:00 - Deep Stillness & Loop
 
 🏷️ Hashtags:
-#studywithme #lofi #chillbeats #southeastasialofi #gamelanlofi #ambientrain #codingmusic #relaxingbeats`,
-    tags: 'lofi, study with me, southeast asia lofi, gamelan lofi, thai pop chill, vietnam lofi, dan bau, ranat, study beats, coding music, rain ambiance'
+${defaultHash}`,
+    tags: 'lofi, study with me, indian lofi, sitar lofi, bansuri, tabla, gamelan lofi, thai pop chill, vietnam lofi, dan bau, deep work, coding music, rain ambiance'
   };
 }
+
 
 export function buildNegativePrompt(state) {
   return 'vocals, singing, speech, aggressive EDM drops, heavy metal distortion, harsh synth leads, jarring sound effects, abrupt climaxes';

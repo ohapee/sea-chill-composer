@@ -406,7 +406,7 @@ function init() {
     applyState(state);
     generate();
     saveLastState(state);
-    flash(`🎲 おまかせ東南アジアBGM「${state.trackTitle}」を作成しました🌺`);
+    flash(`🎲 おまかせオリエンタルBGM「${state.trackTitle}」を作成しました🌺`);
   });
 
   // リセット
@@ -530,7 +530,7 @@ function init() {
           playBtn.textContent = '■ STOP (停止)';
           playBtn.classList.add('playing');
         } else {
-          playBtn.textContent = '▶ PLAY (ガムラン×ローファイ試聴)';
+          playBtn.textContent = '▶ PLAY (ガムラン＆シタール試聴)';
           playBtn.classList.remove('playing');
           stepBulbs.forEach(b => b.classList.remove('active'));
         }

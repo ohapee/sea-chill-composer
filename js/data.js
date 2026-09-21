@@ -1,23 +1,51 @@
 /**
- * 東南アジア・チル＆ポップBGMコンポーザー - 設定データ定義
- * インドネシア、タイ、ベトナム、フィリピンの伝統音色 × 現代ローファイ/ポップス
+ * 東南アジア＆インド・オリエンタル・チル＆ポップBGMコンポーザー - 設定データ定義
+ * 東南アジア（インドネシア・タイ・ベトナム・フィリピン）＋ インド古典・フュージョン・ラーガ
  */
 
-// 4大チャンネルジャンル
+// チャンネルジャンル（東南アジア ＆ インド古典・フュージョン）
 export const GENRES = [
   {
     id: 'sea_lofi',
-    ja: 'SEA Lofi / Chill Beats (勉強・作業用BGM・最推奨)',
+    ja: 'SEA Lofi / Chill Beats (勉強・作業用BGM・東南アジア)',
     en: 'Southeast Asian lo-fi hip hop study beats blending chilled boom-bap drums, cozy Rhodes chords, and authentic traditional ethnic melodies',
-    tag: 'Lofi Chill Beats',
+    tag: 'SEA Lofi Chill',
     desc: 'BPM 70〜88。勉強やプログラミング、カフェ作業に最適な落ち着いたビート。ガムランや木琴、一弦琴が心地よく香る。'
+  },
+  {
+    id: 'indian_classical_lofi',
+    ja: 'Soulful Indian Classical LoFi (シタール・バンスリ・雨のローファイ)',
+    en: 'Soulful Indian classical lofi chillhop combining warm vinyl crackle, gentle hip-hop drums, sitar riffs, bansuri bamboo flute, and rain ambiance',
+    tag: 'Indian Classical LoFi',
+    desc: 'BPM 72〜86。シタールとバンスリ（竹笛）の豊かなメロディに、雨の環境音とローファイビートが溶け合うリラクゼーション・勉強用BGM。'
+  },
+  {
+    id: 'indian_jazz_fusion',
+    ja: 'Indian Jazz Fusion (タブラ × サックス × タンプーラ / Deep Work)',
+    en: 'introspective Indian jazz fusion session blending hypnotic tabla grooves, smoky soprano saxophone, Rhodes piano, and tanpura drone for deep work focus',
+    tag: 'Indian Jazz Fusion',
+    desc: 'BPM 80〜96。「PickBeat Fusion」のように、タブラのリズムとサックス、バンスリが即興的に絡み合うミニマルで知的な作業集中セッション。'
+  },
+  {
+    id: 'raag_focus_ambient',
+    ja: 'Raag-Inspired Focus (ラーガ・ヤーマン / 夕暮れの集中・知的瞑想)',
+    en: 'classical Indian Raag Yaman and Raag Bilawal inspired functional study music, floating with sitar bends, meditative tanpura drone, and peaceful flow',
+    tag: 'Raag Focus Study',
+    desc: 'BPM 65〜80。時間帯や気分に合わせて聴く古典ラーガ（Raag Yaman等）を現代の集中BGMとして再構築。'
+  },
+  {
+    id: 'carnatic_yoga',
+    ja: 'Carnatic Instrumental / Meditation (南インド古典・ヨガ・スパ)',
+    en: 'sacred South Indian Carnatic instrumental ambient for yoga, spa, and deep meditation, featuring Saraswati Veena, mridangam, and bamboo flute',
+    tag: 'Carnatic Meditation',
+    desc: '無拍子またはゆったりしたリズム。南インド古典（ヴィーナ、ムリダンガム）による格調高く清浄なヨガ・スパ・瞑想音楽。'
   },
   {
     id: 'sea_pop_cover',
     ja: 'SEA Pop Instrumental Covers (T-Pop/I-Pop/V-Pop調インスト)',
     en: 'mellow acoustic guitar and emotional piano instrumental covers of Southeast Asian pop ballads (T-Pop, I-Pop, V-Pop, OPM)',
-    tag: 'Pop Instrumental',
-    desc: 'BPM 75〜98。各国のSpotifyヒットチャートを意識した、切なくエモーショナルな旋律をピアノやアコギで優しく奏でる。'
+    tag: 'SEA Pop Covers',
+    desc: 'BPM 75〜98。タイ・インドネシア・ベトナムのSpotifyヒットチャートを意識した、切なくエモーショナルな旋律をピアノやアコギで優しく奏でる。'
   },
   {
     id: 'tropical_vlog',
@@ -28,16 +56,67 @@ export const GENRES = [
   },
   {
     id: 'asian_ambient',
-    ja: 'Asian Ambient / Meditation (熱帯雨林・睡眠・瞑想・スパ)',
+    ja: 'Asian Ambient / Meditation (熱帯雨林・睡眠・瞑想・スコール)',
     en: 'deeply relaxing Asian meditation ambient music with tropical rain sounds, gentle bamboo chimes, sacred temple bells, and lush pad textures',
-    tag: 'Sleep & Meditation',
+    tag: 'Tropical Rain Sleep',
     desc: '無拍子または超スロー。長時間の睡眠用、ヨガ、スパ、瞑想に特化。スコールや竹のせせらぎが心を芯から鎮める。'
   }
 ];
 
 // 国別・伝統民族楽器
 export const ETHNIC_INSTRUMENTS = [
-  // インドネシア
+  // インド (India)
+  {
+    id: 'sitar_classical',
+    country: 'インド (India)',
+    flag: '🇮🇳',
+    ja: 'シタール (Sitar・煌めく共鳴弦と官能的なベンド)',
+    en: 'expressive classical Indian sitar with shimmering sympathetic strings and fluid meend bends'
+  },
+  {
+    id: 'bansuri_flute',
+    country: 'インド (India)',
+    flag: '🇮🇳',
+    ja: 'バンスリ (Bansuri・竹の温もりと深い息づかいのインド竹笛)',
+    en: 'soul-stirring, breathy acoustic Bansuri bamboo flute playing serene, lingering ornamentations'
+  },
+  {
+    id: 'tabla_drums',
+    country: 'インド (India)',
+    flag: '🇮🇳',
+    ja: 'タブラ (Tabla・豊かな倍音を鳴らすインド伝統太鼓)',
+    en: 'mesmerizing acoustic tabla percussion playing articulate, melodic rhythmic grooves'
+  },
+  {
+    id: 'sarod_fretless',
+    country: 'インド (India)',
+    flag: '🇮🇳',
+    ja: 'サロッド (Sarod・フレットレス金属指板の深く鋭い響き)',
+    en: 'deep, resonant, fretless Indian sarod with metallic fingerboard sliding runs'
+  },
+  {
+    id: 'tanpura_drone',
+    country: 'インド (India)',
+    flag: '🇮🇳',
+    ja: 'タンプーラ (Tanpura・瞑想状態へと誘う神聖な持続ドローン)',
+    en: 'hypnotic, harmonic rich acoustic tanpura string drone establishing a sacred, grounded atmosphere'
+  },
+  {
+    id: 'veena_carnatic',
+    country: 'インド (India)',
+    flag: '🇮🇳',
+    ja: 'サラスヴァティ・ヴィーナ (Veena・南インド古典の重厚な弦の調べ)',
+    en: 'stately, rich acoustic South Indian Saraswati Veena carrying majestic Carnatic gamakas'
+  },
+  {
+    id: 'mridangam_drum',
+    country: 'インド (India)',
+    flag: '🇮🇳',
+    ja: 'ムリダンガム (Mridangam・南インド古典の両面太鼓)',
+    en: 'tonal, rhythmic double-headed Mridangam drum accents grounding the spiritual flow'
+  },
+
+  // インドネシア (Indonesia)
   {
     id: 'gamelan_bells',
     country: 'インドネシア (Indonesia)',
@@ -67,7 +146,7 @@ export const ETHNIC_INSTRUMENTS = [
     en: 'delicate, harp-like plucks of the Indonesian palm-leaf Sasando zither'
   },
 
-  // タイ
+  // タイ (Thailand)
   {
     id: 'ranat_xylophone',
     country: 'タイ (Thailand)',
@@ -97,7 +176,7 @@ export const ETHNIC_INSTRUMENTS = [
     en: 'rounded circular bronze gong chimes of Khong Wong providing gentle rhythmic melody'
   },
 
-  // ベトナム
+  // ベトナム (Vietnam)
   {
     id: 'dan_bau_monochord',
     country: 'ベトナム (Vietnam)',
@@ -127,7 +206,7 @@ export const ETHNIC_INSTRUMENTS = [
     en: 'deep hollow resonant bamboo tubes of Klong Put played with clapping air pulses'
   },
 
-  // フィリピン
+  // フィリピン (Philippines)
   {
     id: 'kulintang_gongs',
     country: 'フィリピン (Philippines)',
@@ -151,9 +230,10 @@ export const ETHNIC_INSTRUMENTS = [
   }
 ];
 
-// 現代楽器・チル編成
+// 現代楽器・チル・ジャズ編成
 export const MODERN_INSTRUMENTS = [
   { id: 'rhodes_chill', ja: 'ローズピアノ (温かいエレピ和音)', en: 'warm, dusty Rhodes electric piano chords with gentle tremolo' },
+  { id: 'jazz_sax', ja: 'ソプラノ/テナーサックス (インディアン・ジャズの主役)', en: 'smoky, introspective soprano saxophone floating with jazz phrasing' },
   { id: 'acoustic_guitar', ja: 'アコースティックギター (ナイロン弦の爪弾き)', en: 'intimate acoustic nylon-string fingerstyle guitar' },
   { id: 'lofi_boombap', ja: 'ローファイ・ビート (スナップ＆揺らぎドラム)', en: 'relaxed lo-fi boom-bap drums with vinyl crackle and laid-back swing' },
   { id: 'warm_subbass', ja: 'メロウ・サブベース (深く丸い低音)', en: 'smooth, deep sub-bassline warming the bottom end without harshness' },
@@ -161,18 +241,31 @@ export const MODERN_INSTRUMENTS = [
   { id: 'tropical_pluck', ja: 'トロピカル・マリンバ / プラック (南国の透明感)', en: 'delicate acoustic marimba plucks adding sparkling tropical highlights' }
 ];
 
-// 熱帯の環境音・自然音
+// 熱帯・モンスーン・環境音
 export const TROPICAL_ENVIRONMENTS = [
+  { id: 'monsoon_rain', ja: 'インドのモンスーン豪雨・大地を包む雨音', en: 'warm, continuous Indian monsoon rain shower drumming gently on earth and leaves' },
   { id: 'bali_rain', ja: 'バリ島の熱帯スコール・屋根を叩く雨音', en: 'soft tropical rain falling on a thatched wooden villa roof in Bali' },
   { id: 'mekong_stream', ja: 'メコン川のせせらぎ・水滴の音', en: 'gentle natural river stream and trickling freshwater droplets' },
+  { id: 'ganges_dawn', ja: 'ガンジス河の夜明け・川霧と遠くの寺院ベル', en: 'peaceful dawn on riverbanks with soft river ripples and distant holy temple bells' },
   { id: 'night_cafe', ja: 'バンコク/ハノイの深夜オープンカフェ (氷の音・話し声)', en: 'cozy ambient open-air night cafe murmurs with clinking iced coffee glasses' },
   { id: 'jungle_crickets', ja: '熱帯雨林の夕暮れ・虫の音と微風', en: 'peaceful tropical evening jungle crickets, distant night birds, and warm breeze' },
-  { id: 'temple_chimes', ja: '寺院の竹風鈴と静寂', en: 'gentle bamboo wind chimes softly ringing at a Buddhist garden temple' },
-  { id: 'island_waves', ja: 'プーケットの静かな夜の波音', en: 'calm, rhythmic gentle ocean waves lapping softly against tropical sand' }
+  { id: 'temple_chimes', ja: '寺院の竹風鈴と静寂', en: 'gentle bamboo wind chimes softly ringing at a peaceful garden temple' }
 ];
 
-// 和声・スケール
+// 和声・スケール・ラーガ
 export const SCALES = {
+  raag_yaman: {
+    ja: 'ラーガ・ヤーマン (Raag Yaman / 夕暮れ〜夜の安らぎ・知的集中)',
+    en: 'classical Indian Raag Yaman scale (Lydian-like with sharp 4th) radiating evening peace and intellectual calm'
+  },
+  raag_bilawal: {
+    ja: 'ラーガ・ビラーワル (Raag Bilawal / 晴れやかな朝の目覚め・明晰さ)',
+    en: 'uplifting Indian Raag Bilawal scale (natural major notes) conveying morning clarity and gentle optimism'
+  },
+  raag_bhairavi: {
+    ja: 'ラーガ・バイラヴィ (Raag Bhairavi / 深い哀愁と心を鎮める全音階)',
+    en: 'devotional Indian Raag Bhairavi scale filled with deep compassion and meditative surrender'
+  },
   pelog_bali: {
     ja: 'バリ・ペロッグ音階 (Pelog / 神秘的で美しい東南アジア情緒)',
     en: 'traditional Balinese Pelog pentatonic scale full of mystical, sparkling oriental allure'
@@ -207,59 +300,61 @@ export const DURATIONS = [
 // YouTube動画制作メタデータ（90分〜2時間勉強動画支援）
 export const YOUTUBE_TEMPLATES = [
   {
-    theme: 'study_rain',
+    theme: 'indian_lofi_rain',
+    title: 'Monsoon in Varanasi 🌧️ Soulful Indian Classical LoFi [90 Mins Sitar & Bansuri Study]',
+    desc: `Cozy Indian classical lo-fi beats featuring acoustic Sitar, Bansuri flute, and warm monsoon rain.
+Perfect for deep focus, coding, studying, and relaxing.
+
+🎧 Instruments:
+- Sitar, Bansuri (Bamboo Flute), Tanpura Drone, Lo-Fi Boom-Bap Drums
+- Ambience: Gentle Indian Monsoon Rain
+
+🏷️ Tags:
+#indianlofi #sitarlofi #studywithme #bansurichill #classicalindianlofi #rainlofi #deepwork`,
+    hashtags: '#indianlofi #sitar #bansuri #studywithme #chillbeats'
+  },
+  {
+    theme: 'indian_jazz_fusion',
+    title: 'Midnight Delhi Sessions 🎷 Indian Jazz Fusion [2 Hours Deep Work & Coding Flow]',
+    desc: `Minimalist Indian jazz fusion inspired by PickBeat Fusion.
+Blending live acoustic Tabla rhythms, smoky saxophone, and soothing Rhodes piano.
+
+🎧 Instruments:
+- Tabla, Soprano Saxophone, Tanpura, Warm Electric Piano
+
+🏷️ Tags:
+#indianjazz #tabla #jazzfusion #pickbeat #deepwork #studymusic #focusmusic`,
+    hashtags: '#indianjazz #tabla #saxfusion #studymusic #deepwork'
+  },
+  {
+    theme: 'raag_yaman_meditation',
+    title: 'Peace of Raag Yaman 🪔 Classical Indian Evening Meditation & Yoga [Deep Healing]',
+    desc: `Immerse in the timeless serenity of Raag Yaman. Sitar and Bansuri woven over a sacred Tanpura drone.
+Designed for stress relief, yoga, and evening mindfulness.
+
+🏷️ Tags:
+#raagyaman #indianclassical #meditationmusic #yogabgm #healingfrequencies`,
+    hashtags: '#raagyaman #meditation #sitar #peacefulmusic'
+  },
+  {
+    theme: 'study_rain_bali',
     title: 'Rainy Night in Ubud 🌧️ Southeast Asia Lofi Study Beats [90 Mins Deep Focus]',
     desc: `Track created with Southeast Asian ethnic instruments (Gamelan, Angklung & Rhodes).
 Perfect for studying, coding, reading, and deep work.
 
-🎧 Track Details:
-- Vibe: Traditional Balinese Gamelan & Lo-Fi Boom-Bap
-- Ambience: Tropical Night Rain & Distant Crickets
-- Target: Deep Focus, Pomodoro Session, Coding Flow
-
 🏷️ Tags:
-#lofi #studywithme #indonesialofi #gamelanlofi #relaxingbeats #ambientrain #southeastasialofi #chillhop`,
-    hashtags: '#studywithme #lofihiphop #chillbeats #southeastasialofi #gamelan'
-  },
-  {
-    theme: 'hanoi_cafe',
-    title: 'Hanoi Coffee Shop ☕ Vietnamese Chill Hop & Dan Bau Lo-Fi [2 Hours Chill Session]',
-    desc: `Relaxing acoustic vibes from Vietnam. Featuring Dan Bau (monochord) & gentle guitar melodies.
-Enjoy your coffee break or productive study session.
-
-🎧 Instruments:
-- Vietnamese Dan Bau, Acoustic Guitar, Warm Rhodes, Cafe Ambiance
-
-🏷️ Tags:
-#vpoplofi #hanoicafe #danbau #vietnamlofi #coffeeshoplofi #chillbeats #workmusic`,
-    hashtags: '#vietnamlofi #hanoicafe #lofiband #danbau #chillmusic'
-  },
-  {
-    theme: 'bangkok_sunset',
-    title: 'Bangkok Sunset Groove 🌇 Thai Pop Acoustic Instrumental [Study & Relax]',
-    desc: `Mellow T-Pop inspired piano and Ranat xylophone melodies floating over a smooth evening groove.
-
-🎧 Mood:
-- Golden Hour Sunset, Breeze, Sweet Nostalgia
-
-🏷️ Tags:
-#tpop #thailandlofi #bangkokchill #ranat #studybgm #acousticcover`,
-    hashtags: '#tpop #thailandlofi #bangkokchill #studymusic'
-  },
-  {
-    theme: 'bali_sleep',
-    title: 'Bali Temple Meditation 🌿 Tropical Rain & Sacred Gamelan Chimes [Deep Sleep]',
-    desc: `Peaceful ambient meditation music for sleep, insomnia relief, yoga, and calm reflection.
-Pure tropical nature sounds blended with soft bronze chimes.
-
-🏷️ Tags:
-#meditationmusic #sleepmusic #baliamber #ambientgamelan #naturesounds`,
-    hashtags: '#sleepmusic #meditation #tropicalrain #gamelanambient'
+#lofi #studywithme #indonesialofi #gamelanlofi #ambientrain #southeastasialofi`,
+    hashtags: '#studywithme #lofihiphop #chillbeats #gamelan'
   }
 ];
 
-// 曲名サジェスト（東南アジア・リゾート・カフェ）
+// 曲名サジェスト（東南アジア ＆ インド）
 export const TITLE_SUGGESTIONS = [
+  'Monsoon Afternoon in Varanasi',
+  'Midnight Delhi Jazz Session',
+  'Rainy Sitar in Jaipur',
+  'Bansuri Breeze in Kerala',
+  'Raag Yaman Twilight Study',
   'Rainy Afternoon in Ubud',
   'Midnight Hanoi Coffee',
   'Bangkok Sunset Lofi',
@@ -267,11 +362,6 @@ export const TITLE_SUGGESTIONS = [
   'Manila Bay Breeze',
   'Saigon River Twilight',
   'Bali Temple Rain',
-  'Java Green Tea Chill',
-  'Phuket Golden Hour',
-  'Tropical Bamboo Solitude',
-  'Mekong River Reverie',
-  'Lofi Rain in Da Nang',
-  'Kuala Lumpur Midnight Walk',
-  'Cebu Island Gentle Waves'
+  'Himalayan Pine Forest Ambient',
+  'Goa Beach Evening Glow'
 ];

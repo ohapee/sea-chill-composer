@@ -89,6 +89,7 @@
           <button type="button" class="country-tab" data-country="タイ">🇹🇭 タイ</button>
           <button type="button" class="country-tab" data-country="ベトナム">🇻🇳 ベトナム</button>
           <button type="button" class="country-tab" data-country="フィリピン">🇵🇭 フィリピン</button>
+          <button type="button" class="country-tab" data-country="インド">🇮🇳 インド</button>
         </div>
 
         <div class="field">
@@ -99,7 +100,7 @@
 
       <!-- 3. 現代チル楽器＆熱帯環境音 -->
       <section class="panel">
-        <h2>3. 現代チル楽器＆熱帯の自然音 <span class="badge">CHILL & NATURE</span></h2>
+        <h2>3. 現代チル楽器＆熱帯・モンスーン自然音 <span class="badge">CHILL & NATURE</span></h2>
 
         <div class="field">
           <label class="small">現代チル洋楽器（複数選択可）</label>
@@ -107,7 +108,7 @@
         </div>
 
         <div class="field">
-          <label class="small">熱帯の環境音・アンビエント（複数選択可）</label>
+          <label class="small">熱帯・モンスーン環境音（複数選択可）</label>
           <div id="envChips" class="chip-row"></div>
         </div>
       </section>
@@ -117,8 +118,11 @@
         <h2>4. テンポ・和声スケール・尺 <span class="badge">GROOVE</span></h2>
 
         <div class="field">
-          <label class="small" for="scaleSelect">和声スケール・旋律様式</label>
+          <label class="small" for="scaleSelect">和声スケール・ラーガ旋律</label>
           <select id="scaleSelect">
+            <option value="raag_yaman">ラーガ・ヤーマン (Raag Yaman / 夕暮れ〜夜の安らぎ・知的集中)</option>
+            <option value="raag_bilawal">ラーガ・ビラーワル (Raag Bilawal / 晴れやかな朝の目覚め・明晰さ)</option>
+            <option value="raag_bhairavi">ラーガ・バイラヴィ (Raag Bhairavi / 深い哀愁と心を鎮める全音階)</option>
             <option value="pelog_bali" selected>バリ・ペロッグ音階 (Pelog / 神秘的で美しい東南アジア情緒)</option>
             <option value="slendro_java">ジャワ・スレンドロ音階 (Slendro / 穏やかでピースフルな響き)</option>
             <option value="sea_pop_chords">SEAポップス王道進行 (IV - V - III - VI / 切なくエモい)</option>
@@ -143,12 +147,13 @@
         <!-- ガムラン＆ローファイ プレビュープレイヤー -->
         <div class="preview-player">
           <div class="preview-controls">
-            <button type="button" class="play-btn" id="previewToggleBtn">▶ PLAY (ガムラン×ローファイ試聴)</button>
+            <button type="button" class="play-btn" id="previewToggleBtn">▶ PLAY (ガムラン＆シタール試聴)</button>
             <div class="volume-row">
               <span>VOLUME</span>
               <input type="range" id="previewVolume" min="0" max="1" step="0.05" value="0.75">
             </div>
           </div>
+
           <!-- 16ステップ バンブーLED -->
           <div class="step-tracker" id="stepTracker">
             <div class="step-bulb"></div>

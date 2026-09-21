@@ -136,54 +136,65 @@ class SeaChillAudioEngine {
   // 16ステップシーケンスの再生
   playStep(time, stepIndex, state) {
     const s = stepIndex % 16;
-    const isLofi = state.genre === 'sea_lofi' || state.genre === 'sea_pop_cover';
+    const isLofi = state.genre === 'sea_lofi' || state.genre === 'sea_pop_cover' || state.genre === 'indian_classical_lofi' || state.genre === 'indian_jazz_fusion';
+    const hasIndia = Array.from(state.ethnicInsts).some(id => ['sitar_classical', 'bansuri_flute', 'tabla_drums', 'sarod_fretless', 'tanpura_drone'].includes(id)) || state.genre.startsWith('indian') || state.genre.startsWith('raag') || state.genre.startsWith('carnatic');
 
-    // 1. ローファイ・ドラム（スイング感）
-    // キック: 0, 10
-    if (isLofi && (s === 0 || s === 10)) {
-      this.playKick(time);
-    }
-    // スネア/スナップ: 4, 12
-    if (isLofi && (s === 4 || s === 12)) {
-      this.playSnare(time);
-    }
-    // ハイハット: 偶数ステップ + 跳ね
-    if (isLofi && (s % 2 === 0 || s === 7 || s === 15)) {
-      this.playHiHat(time, s % 4 === 0 ? 0.4 : 0.22);
+    // 1. ローファイ・ドラム / タブラ
+    if (isLofi) {
+      if (hasIndia) {
+        // インド・タブラ風リズム
+        if (s === 0 || s === 6 || s === 10) {
+          this.playTablaBayan(time, 98); // 低音「ゲ」
+        }
+        if (s === 4 || s === 12) {
+          this.playSnare(time); // スナップ
+        }
+        if (s % 2 === 0 || s === 7 || s === 15) {
+          this.playHiHat(time, s % 4 === 0 ? 0.35 : 0.2);
+        }
+      } else {
+        // 通常のブームバップ
+        if (s === 0 || s === 10) this.playKick(time);
+        if (s === 4 || s === 12) this.playSnare(time);
+        if (s % 2 === 0 || s === 7 || s === 15) this.playHiHat(time, s % 4 === 0 ? 0.4 : 0.22);
+      }
     }
 
-    // 2. ローズピアノ（Rhodesコード）: 4小節進行
-    // 0ステップ（コード1）, 8ステップ（コード2）
+    // 2. ローズピアノ（Rhodesコード）
     if (s === 0) {
-      // Fmaj9 (F, A, C, E, G)
       this.playRhodesChord(time, [174.61, 220.00, 261.63, 329.63, 392.00]);
     } else if (s === 8) {
-      // Cmaj7 (C, E, G, B)
       this.playRhodesChord(time, [130.81, 164.81, 196.00, 246.94]);
     }
 
-    // 3. ガムラン金属琴（ペロッグ音階 / Pelog Selisir）の澄んだチャイム
-    // ペロッグ音階: E4 (329.63), F4 (349.23), G4 (392.00), B4 (493.88), C5 (523.25), E5 (659.25)
-    const pelogNotes = [329.63, 349.23, 392.00, 493.88, 523.25, 659.25];
-    // メロディのパターン
-    const gamelanPattern = {
-      2: pelogNotes[2], // G4
-      5: pelogNotes[3], // B4
-      7: pelogNotes[4], // C5
-      10: pelogNotes[5], // E5
-      13: pelogNotes[3], // B4
-      14: pelogNotes[1]  // F4
-    };
-
-    if (gamelanPattern[s]) {
-      this.playGamelanChime(time, gamelanPattern[s]);
-    }
-
-    // 4. 木琴（ラナート）の軽快なロール（時折入るアクセント）
-    if (s === 3 || s === 11) {
-      this.playRanatWood(time, pelogNotes[(s + 2) % pelogNotes.length]);
+    // 3. インド古典旋律（シタール / バンスリのラーガ・フレーズ）または ガムラン
+    if (hasIndia) {
+      // ラーガ・ヤーマン調のシタール・ベンド音 (D4, E4, F#4, A4, B4, C#5)
+      const yamanNotes = [293.66, 329.63, 369.99, 440.00, 493.88, 554.37, 587.33];
+      if (s === 2) this.playSitarMeend(time, yamanNotes[1], yamanNotes[2]); // E4 -> F#4
+      if (s === 5) this.playSitarMeend(time, yamanNotes[3], yamanNotes[4]); // A4 -> B4
+      if (s === 8) this.playSitarMeend(time, yamanNotes[5], yamanNotes[6]); // C#5 -> D5
+      if (s === 12) this.playSitarMeend(time, yamanNotes[4], yamanNotes[3]); // B4 -> A4
+    } else {
+      // ガムラン金属琴（ペロッグ音階 / Pelog Selisir）
+      const pelogNotes = [329.63, 349.23, 392.00, 493.88, 523.25, 659.25];
+      const gamelanPattern = {
+        2: pelogNotes[2],
+        5: pelogNotes[3],
+        7: pelogNotes[4],
+        10: pelogNotes[5],
+        13: pelogNotes[3],
+        14: pelogNotes[1]
+      };
+      if (gamelanPattern[s]) {
+        this.playGamelanChime(time, gamelanPattern[s]);
+      }
+      if (s === 3 || s === 11) {
+        this.playRanatWood(time, pelogNotes[(s + 2) % pelogNotes.length]);
+      }
     }
   }
+
 
   // ガムラン青銅金属琴（澄んだ倍音と余韻）
   playGamelanChime(time, freq) {
@@ -325,11 +336,57 @@ class SeaChillAudioEngine {
 
     noise.connect(filter);
     filter.connect(gain);
-    gain.connect(this.masterGain);
-
     noise.start(time);
     noise.stop(time + 0.04);
   }
+
+  // シタール・ミール（ポルタメント・ベンド演奏）
+  playSitarMeend(time, startFreq, endFreq) {
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+
+    // 金属弦とジャワリ（倍音）
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(startFreq, time);
+    // 緩やかなピッチベンド
+    osc.frequency.exponentialRampToValueAtTime(endFreq, time + 0.16);
+
+    const filter = this.ctx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.setValueAtTime(startFreq * 2, time);
+    filter.Q.setValueAtTime(2.5, time);
+
+    gain.gain.setValueAtTime(0.24, time);
+    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.55);
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(this.masterGain);
+
+    osc.start(time);
+    osc.stop(time + 0.56);
+  }
+
+  // タブラ・バヤン（低音太鼓のベンド打音）
+  playTablaBayan(time, freq = 98) {
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+
+    osc.type = 'sine';
+    // タブラ特有の押弦ベンド（わずかにピッチが揺れる）
+    osc.frequency.setValueAtTime(freq, time);
+    osc.frequency.exponentialRampToValueAtTime(freq * 0.82, time + 0.2);
+
+    gain.gain.setValueAtTime(0.85, time);
+    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.3);
+
+    osc.connect(gain);
+    gain.connect(this.masterGain);
+
+    osc.start(time);
+    osc.stop(time + 0.32);
+  }
 }
+
 
 export const seaChillAudio = new SeaChillAudioEngine();
