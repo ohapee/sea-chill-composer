@@ -309,6 +309,13 @@ h2 .badge {
   border-color: #c4b5fd;
 }
 
+#negativeChips .chip.on {
+  background: linear-gradient(180deg, #e11d48 0%, #9f1239 100%);
+  color: #ffffff;
+  border-color: #fda4af;
+  box-shadow: 0 0 10px rgba(225, 29, 72, 0.4);
+}
+
 /* 国別フィルタータブ */
 .country-tabs {
   display: flex;
@@ -685,6 +692,15 @@ textarea:focus {
 .copy-row button:hover {
   background: linear-gradient(180deg, #34d399 0%, #059669 100%);
   transform: translate(-1px, -1px);
+}
+
+#copyNegBtn {
+  background: linear-gradient(180deg, #e11d48 0%, #9f1239 100%);
+  border-color: #f43f5e;
+}
+
+#copyNegBtn:hover {
+  background: linear-gradient(180deg, #f43f5e 0%, #be123c 100%);
 }
 
 /* タイムライン画面 */

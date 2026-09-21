@@ -9,7 +9,8 @@ import {
   TROPICAL_ENVIRONMENTS,
   SCALES,
   DURATIONS,
-  YOUTUBE_TEMPLATES
+  YOUTUBE_TEMPLATES,
+  NEGATIVE_OPTIONS
 } from './data.js';
 
 export function buildPrompt(state) {
@@ -165,7 +166,19 @@ ${defaultHash}`,
 
 
 export function buildNegativePrompt(state) {
-  return 'vocals, singing, speech, aggressive EDM drops, heavy metal distortion, harsh synth leads, jarring sound effects, abrupt climaxes';
+  if (!state.negatives || state.negatives.size === 0) {
+    return '';
+  }
+
+  const selected = NEGATIVE_OPTIONS.filter(opt => state.negatives.has(opt.id));
+  if (selected.length === 0) return '';
+
+  if (state.lang === 'ja') {
+    const list = selected.map(s => `・${s.ja}`).join('\n');
+    return `【完全除外指示（Negative Prompt）】\n${list}\n※上記のような作業・瞑想の妨げとなる激しい要素は一切含めず、穏やかで上質なチルインストゥルメンタルにすること。`;
+  }
+
+  return selected.map(s => s.en).join(', ');
 }
 
 export function buildTimelineData(state) {

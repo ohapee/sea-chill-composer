@@ -365,3 +365,33 @@ export const TITLE_SUGGESTIONS = [
   'Himalayan Pine Forest Ambient',
   'Goa Beach Evening Glow'
 ];
+
+// 禁止事項・ネガティブプロンプト（完全除外したい激しい要素）
+export const NEGATIVE_OPTIONS = [
+  {
+    id: 'vocals_distract',
+    ja: '人の歌声・話し声・ラップ・早口ボーカル (作業・瞑想の妨害防止)',
+    en: 'vocals, singing, human speech, rapping, aggressive shouts, fast lyrical delivery, vocal chops, spoken words'
+  },
+  {
+    id: 'heavy_edm_drops',
+    ja: '激しいEDMドロップ・過剰な重低音・ダブステップ (びっくり防止)',
+    en: 'heavy EDM drops, aggressive bass drops, dubstep wobble, hard trap 808 distortion, intense club build-ups'
+  },
+  {
+    id: 'harsh_metal_screech',
+    ja: '耳障りな甲高いノイズ・歪んだエレキギター・金切声 (耳の疲労防止)',
+    en: 'harsh piercing highs, screeching noise, heavy metal guitar distortion, piercing synths, painful high-frequency resonance'
+  },
+  {
+    id: 'fast_chaotic_tempo',
+    ja: '早すぎるテンポ・緊張感・ホラー・焦燥感を煽る劇的展開',
+    en: 'fast chaotic tempo, intense cinematic suspense, horror atmosphere, dark dramatic swells, sudden loud climaxes'
+  },
+  {
+    id: 'jarring_sfx_horns',
+    ja: '耳障りな効果音・けたたましいクラクション・サイレン・爆発音',
+    en: 'jarring sound effects, car horns, emergency sirens, gunshots, explosions, abrupt jump scares'
+  }
+];
+

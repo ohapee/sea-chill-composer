@@ -117,6 +117,7 @@ function serializeState(s) {
     ethnicInsts: Array.from(s.ethnicInsts || []),
     modernInsts: Array.from(s.modernInsts || []),
     environments: Array.from(s.environments || []),
+    negatives: Array.from(s.negatives || []),
     scale: s.scale,
     tempo: s.tempo,
     duration: s.duration,
@@ -130,6 +131,7 @@ function deserializeState(obj) {
     ...obj,
     ethnicInsts: new Set(obj.ethnicInsts || []),
     modernInsts: new Set(obj.modernInsts || []),
-    environments: new Set(obj.environments || [])
+    environments: new Set(obj.environments || []),
+    negatives: new Set(obj.negatives || ['vocals_distract', 'heavy_edm_drops', 'harsh_metal_screech', 'fast_chaotic_tempo'])
   };
 }

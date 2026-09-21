@@ -2,7 +2,7 @@
  * 東南アジア・チル＆ポップBGMコンポーザー - Service Worker (PWA対応)
  */
 
-const CACHE_NAME = 'sea-chill-v1';
+const CACHE_NAME = 'sea-chill-v2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

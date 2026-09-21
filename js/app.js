@@ -10,7 +10,8 @@ import {
   SCALES,
   DURATIONS,
   YOUTUBE_TEMPLATES,
-  TITLE_SUGGESTIONS
+  TITLE_SUGGESTIONS,
+  NEGATIVE_OPTIONS
 } from './data.js';
 
 import {
@@ -40,6 +41,7 @@ const state = {
   ethnicInsts: new Set(['gamelan_bells', 'angklung_bamboo', 'ranat_xylophone', 'dan_bau_monochord']),
   modernInsts: new Set(['rhodes_chill', 'lofi_boombap', 'warm_subbass']),
   environments: new Set(['bali_rain', 'jungle_crickets']),
+  negatives: new Set(['vocals_distract', 'heavy_edm_drops', 'harsh_metal_screech', 'fast_chaotic_tempo']),
   scale: 'pelog_bali',
   tempo: 80,
   duration: '60',
@@ -162,13 +164,18 @@ function renderYouTubeBox() {
 function generate() {
   const promptOut = document.getElementById('promptOut');
   const negativeOut = document.getElementById('negativeOut');
+  const negativeSection = document.getElementById('negativeSection');
 
   if (promptOut) {
     promptOut.value = buildPrompt(state);
   }
 
+  const negText = buildNegativePrompt(state);
   if (negativeOut) {
-    negativeOut.value = buildNegativePrompt(state);
+    negativeOut.value = negText;
+  }
+  if (negativeSection) {
+    negativeSection.style.display = negText ? 'block' : 'none';
   }
 
   renderTimeline();
@@ -246,6 +253,7 @@ function applyState(obj) {
   state.ethnicInsts = new Set(obj.ethnicInsts || []);
   state.modernInsts = new Set(obj.modernInsts || []);
   state.environments = new Set(obj.environments || []);
+  state.negatives = new Set(obj.negatives || ['vocals_distract', 'heavy_edm_drops', 'harsh_metal_screech', 'fast_chaotic_tempo']);
   state.scale = obj.scale || 'pelog_bali';
   state.tempo = Number(obj.tempo) || 80;
   state.duration = obj.duration || '60';
@@ -273,6 +281,7 @@ function applyState(obj) {
   renderEthnicChips();
   buildMultiChips(document.getElementById('modernChips'), MODERN_INSTRUMENTS, state.modernInsts, maybeRegenerate);
   buildMultiChips(document.getElementById('envChips'), TROPICAL_ENVIRONMENTS, state.environments, maybeRegenerate);
+  buildMultiChips(document.getElementById('negativeChips'), NEGATIVE_OPTIONS, state.negatives, maybeRegenerate);
 
   // 尺チップ
   const durContainer = document.getElementById('durationChips');
@@ -400,6 +409,7 @@ function init() {
     state.ethnicInsts = new Set(sample(ETHNIC_INSTRUMENTS, 2, 4));
     state.modernInsts = new Set(sample(MODERN_INSTRUMENTS, 2, 4));
     state.environments = new Set(sample(TROPICAL_ENVIRONMENTS, 1, 2));
+    state.negatives = new Set(['vocals_distract', 'heavy_edm_drops', 'harsh_metal_screech', 'fast_chaotic_tempo']);
     state.scale = Object.keys(SCALES)[Math.floor(Math.random() * Object.keys(SCALES).length)];
     state.tempo = 72 + Math.floor(Math.random() * 24); // 72〜95 BPM
 
@@ -416,6 +426,7 @@ function init() {
     state.ethnicInsts = new Set(['gamelan_bells', 'angklung_bamboo', 'ranat_xylophone', 'dan_bau_monochord']);
     state.modernInsts = new Set(['rhodes_chill', 'lofi_boombap', 'warm_subbass']);
     state.environments = new Set(['bali_rain', 'jungle_crickets']);
+    state.negatives = new Set(['vocals_distract', 'heavy_edm_drops', 'harsh_metal_screech', 'fast_chaotic_tempo']);
     state.scale = 'pelog_bali';
     state.tempo = 80;
     state.duration = '60';
@@ -488,6 +499,20 @@ function init() {
     try {
       await navigator.clipboard.writeText(out.value);
       flash('プロンプトをコピーしました！📋');
+    } catch (e) {
+      out.select();
+      document.execCommand('copy');
+      flash('コピーしました！');
+    }
+  });
+
+  // 除外指示（Negative Prompt）コピー
+  document.getElementById('copyNegBtn')?.addEventListener('click', async () => {
+    const out = document.getElementById('negativeOut');
+    if (!out || !out.value) return;
+    try {
+      await navigator.clipboard.writeText(out.value);
+      flash('除外指示（Negative Prompt）をコピーしました！🚫');
     } catch (e) {
       out.select();
       document.execCommand('copy');

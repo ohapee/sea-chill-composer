@@ -176,6 +176,15 @@
         </div>
       </section>
 
+      <!-- 5. 禁止事項・激しい音の除外指定 -->
+      <section class="panel">
+        <h2>5. 禁止事項（作業・瞑想の妨害要素を完全除外） <span class="badge">NEGATIVE</span></h2>
+        <div class="field" style="margin-bottom: 0;">
+          <label class="small">完全にシャットアウトしたい激しい要素（複数選択可）</label>
+          <div id="negativeChips" class="chip-row"></div>
+        </div>
+      </section>
+
       <!-- プリセット・共有 -->
       <section class="panel">
         <h2>プリセット・共有 <span class="badge">PRESETS</span></h2>
@@ -262,6 +271,16 @@
             <span style="font-size: 0.74rem; color: var(--text-sub);">YouTube投稿時にそのままタイトル・概要欄にコピーできます</span>
             <button type="button" id="copyYtBtn">📋 動画タイトル＆概要欄をコピー</button>
           </div>
+        </div>
+      </section>
+
+      <!-- 激しい音・妨害要素の除外指示（Negative Prompt） -->
+      <section class="panel" id="negativeSection" style="display: none;">
+        <h2>激しい音・妨害要素の除外指示 <span class="badge">NEGATIVE</span></h2>
+        <textarea id="negativeOut" readonly spellcheck="false" style="min-height: 80px;" placeholder="除外指示がここに生成されます..."></textarea>
+        <div class="copy-row">
+          <span style="font-size: 0.78rem; color: var(--text-sub);">AI音楽ツールの「Negative Prompt / Exclude Styles」欄に貼り付けます</span>
+          <button type="button" id="copyNegBtn">🚫 除外指示をコピー</button>
         </div>
       </section>
 
